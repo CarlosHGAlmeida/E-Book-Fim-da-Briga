@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Parágrafos dentro de card-hover no modo dark mantêm cor escura */
 .dark .card-hover p {
     color: #4B5563 !important; /* Tailwind text-gray-600 */
@@ -81,6 +85,7 @@ nav a.nav-link:hover {
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 12px 30px rgba(241,95,63,0.22);
     text-decoration: none;
+    background-color: #B2AFAA;
 }
 
 nav a.nav-link:focus {
