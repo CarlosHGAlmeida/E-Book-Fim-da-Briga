@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Fim da Briga Para Comer Alimentos Saudáveis - E-book</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --sage-50: #f6f7f6;
+            --sage-100: #e3e7e3;
+            --sage-200: #c7d0c7;
+            --sage-300: #a2b2a2;
+            --sage-400: #7a907a;
+            --sage-500: #5c7359;
+            --sage-600: #485d46;
+            --sage-700: #3c4d3b;
+            --sage-800: #334032;
+            --sage-900: #2b352b;
+            --coral-50: #fef7f5;
+            --coral-100: #feeae4;
+            --coral-200: #fcd4c5;
+            --coral-300: #f9b5a0;
+            --coral-400: #f58a6b;
+            --coral-500: #f15f3f;
+            --coral-600: #e14a2a;
+            --coral-700: #bb3c22;
+            --coral-800: #9a3320;
+            --coral-900: #7f2e1e;
+        }
+        
+        .dark {
+            --sage-50: #1a1d1a;
+            --sage-100: #2b352b;
+            --sage-200: #3c4d3b;
+            --sage-300: #485d46;
+            --sage-400: #5c7359;
+            --sage-500: #7a907a;
+            --sage-600: #a2b2a2;
+            --sage-700: #c7d0c7;
+            --sage-800: #e3e7e3;
+            --sage-900: #f6f7f6;
+            --coral-50: #2b1f1c;
+            --coral-100: #7f2e1e;
+            --coral-200: #9a3320;
+            --coral-300: #bb3c22;
+            --coral-400: #e14a2a;
+            --coral-500: #f15f3f;
+            --coral-600: #f58a6b;
+            --coral-700: #fcd4c5;
+            --coral-800: #feeae4;
+            --coral-900: #fef7f5;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--sage-50) 0%, var(--sage-100) 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .dark body {
+            /* Fundo dark suavizado: usa transparência para reduzir contraste extremo */
+            background: linear-gradient(135deg, rgba(43,52,43,0.88) 0%, rgba(51,56,51,0.88) 100%);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--coral-400) 0%, var(--coral-500) 50%, var(--coral-600) 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--coral-500), var(--coral-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .dark .card-hover:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--coral-500), var(--coral-600));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(241, 95, 63, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--sage-100);
+            color: var(--sage-800);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--sage-200);
+            transform: translateY(-2px);
+        }
+        
+        .dark .btn-secondary {
+            background: var(--sage-700);
+            color: var(--sage-100);
+        }
+        
+        .dark .btn-secondary:hover {
+            background: var(--sage-600);
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-element {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .no-js .reveal-element {
+            opacity: 1;
+            transform: none;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--sage-100);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .dark .theme-toggle {
+            background: var(--sage-700);
+            color: var(--sage-100);
+        }
+        
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+        
+        .stats-counter {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--coral-500);
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: var(--sage-200);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--coral-500), var(--coral-600));
+            border-radius: 2px;
+            transition: width 2s ease;
+        }
+    </style>
+    <!-- Arquivo de estilos principal (contém hover/focus acessível para nav) -->
+    <link rel="stylesheet" href="styles.css">
+<base target="_blank">
+</head>
+<body class="text-gray-800 dark:text-gray-200">
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="theme-icon"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gradient">Guia Alimentar</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#sobre" class="nav-link text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-all duration-200 font-bold hover:shadow-3xl hover:shadow-black hover:-translate-y-1 active:text-orange-500 dark:active:text-orange-400">Sobre</a>
+                    <a href="#beneficios" class="nav-link text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-all duration-200 font-bold hover:shadow-3xl hover:shadow-black hover:-translate-y-1 active:text-orange-500 dark:active:text-orange-400">Benefícios</a>
+                    <a href="#conteudo" class="nav-link text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-all duration-200 font-bold hover:shadow-3xl hover:shadow-black hover:-translate-y-1 active:text-orange-500 dark:active:text-orange-400">Conteúdo</a>
+                    <a href="#autora" class="nav-link text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-all duration-200 font-bold hover:shadow-3xl hover:shadow-black hover:-translate-y-1 active:text-orange-500 dark:active:text-orange-400">Autora</a>
+                </div>
+                <button onclick="scrollToSection('cta')" class="btn-primary text-white px-6 py-2 rounded-full font-medium">
+                    Quero o E-book
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal-element">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-coral-100 dark:bg-coral-900 text-coral-600 dark:text-coral-300 text-sm font-medium mb-6">
+                        <i class="fas fa-star mr-2"></i>
+                        Guia Prático para Mães
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        <span class="text-gradient">O Fim da Briga</span><br>
+                        Para Comer Alimentos Saudáveis
+                    </h1>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                        Um guia prático para ensinar seu filho a comer de forma leve, saudável e divertida. 
+                        Transforme as refeições em momentos de conexão e aprendizado.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                        <button onclick="scrollToSection('cta')" class="btn-primary text-white px-8 py-4 rounded-full font-semibold text-lg">
+                            <i class="fas fa-download mr-2"></i>
+                            Quero Meu E-book Agora
+                        </button>
+                        <button onclick="scrollToSection('beneficios')" class="btn-secondary px-8 py-4 rounded-full font-semibold text-lg">
+                            <i class="fas fa-play mr-2"></i>
+                            Ver Benefícios
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-8 text-sm text-gray-500 dark:text-gray-400">
+                        <div class="flex items-center">
+                            <i class="fas fa-shield-alt mr-2 text-green-500"></i>
+                            <span>Garantia de 7 dias</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock mr-2 text-blue-500"></i>
+                            <span>Acesso imediato</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal-element">
+                    <div class="relative">
+                        <div class="floating-element">
+                            <img src="/imagens/Capa E-Book Fim da Briga.png" 
+                                 alt="E-book O Fim da Briga" 
+                                 class="w-full max-w-md mx-auto rounded-2xl shadow-2xl">
+                        </div>
+                        <div class="absolute -top-4 -right-4 bg-coral-500 text-white px-4 py-2 rounded-full font-bold pulse-element">
+                            <i class="fas fa-fire mr-1"></i>
+                            Mais Vendido
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white/50 dark:bg-gray-800/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="reveal-element">
+                    <div class="stats-counter" data-target="500">0</div>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2">Mães Atendidas</p>
+                </div>
+                <div class="reveal-element">
+                    <div class="stats-counter" data-target="20">0</div>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2">Anos de Experiência</p>
+                </div>
+                <div class="reveal-element">
+                    <div class="stats-counter" data-target="98">0</div>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2">% de Satisfação</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="reveal-element">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8">
+                    Você se identifica com essas situações?
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6 mb-12">
+                    <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+                        <div class="text-coral-500 text-3xl mb-4">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Recusa Constante</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Seu filho recusa os alimentos saudáveis que você prepara com tanto carinho</p>
+                    </div>
+                    <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+                        <div class="text-coral-500 text-3xl mb-4">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Momentos de Estresse</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Você já se pegou perdendo a paciência e forçando seu filho a comer</p>
+                    </div>
+                    <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+                        <div class="text-coral-500 text-3xl mb-4">
+                            <i class="fas fa-frown"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Refeições Tensas</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Suas refeições em família sempre viram momentos de estresse e brigas</p>
+                    </div>
+                    <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+                        <div class="text-coral-500 text-3xl mb-4">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Dependência de Distrações</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Seu filho só consegue comer com distrações ou chantagens</p>
+                    </div>
+                </div>
+                <div class="bg-coral-50 dark:bg-coral-900/20 p-8 rounded-2xl">
+                    <h3 class="text-2xl font-bold mb-4 text-coral-600 dark:text-coral-400">
+                        A boa notícia é que não é culpa sua!
+                    </h3>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">
+                        O que falta é clareza sobre como incentivar seu filho a comer bem sem brigas. 
+                        É ter acesso às ferramentas certas para melhorar a relação das crianças com os alimentos saudáveis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="beneficios" class="py-20 bg-white/50 dark:bg-gray-800/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal-element">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    O que você vai aprender com este guia
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">
+                    Transforme completamente a relação da sua família com a alimentação
+                </p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal-element">
+                    <img src="/imagens/familiaComendo2.jpg" 
+                         alt="Família feliz na mesa" 
+                         class="w-full rounded-2xl shadow-2xl">
+                </div>
+                <div class="space-y-6 reveal-element">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 bg-coral-500 text-white rounded-full flex items-center justify-center font-bold">
+                            1
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Criar um ambiente positivo</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Livre de brigas e momentos de tensão na mesa</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 bg-coral-500 text-white rounded-full flex items-center justify-center font-bold">
+                            2
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Postura ideal diante da recusa</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Saiba exatamente como reagir quando seu filho recusar alimentos</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 bg-coral-500 text-white rounded-full flex items-center justify-center font-bold">
+                            3
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Levar o lúdico para a mesa</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Criar leveza e diversão durante as refeições</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 bg-coral-500 text-white rounded-full flex items-center justify-center font-bold">
+                            4
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Acompanhar o progresso</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Ferramentas para identificar o que está funcionando</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section id="conteudo" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal-element">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    Conteúdo do E-book
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">
+                    Tudo o que você precisa saber para transformar as refeições da sua família
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg reveal-element">
+                    <div class="text-coral-500 text-3xl mb-4">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Entendendo a Seletividade</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Compreenda as causas da recusa alimentar e como tratá-la de forma respeitosa</p>
+                </div>
+                <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg reveal-element">
+                    <div class="text-coral-500 text-3xl mb-4">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Alimentação Equilibrada</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Aprenda a equilibrar as refeições para garantir todos os nutrientes essenciais</p>
+                </div>
+                <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg reveal-element">
+                    <div class="text-coral-500 text-3xl mb-4">
+                        <i class="fas fa-list-ol"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">7 Passos Práticos</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Um passo a passo estruturado para transformar os momentos das refeições</p>
+                </div>
+                <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg reveal-element">
+                    <div class="text-coral-500 text-3xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Acompanhamento do Progresso</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Ferramentas valiosas para identificar o que está dando certo</p>
+                </div>
+                <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg reveal-element">
+                    <div class="text-coral-500 text-3xl mb-4">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Ideias Criativas</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Sugestões práticas e divertidas para despertar o interesse das crianças</p>
+                </div>
+                <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg reveal-element">
+                    <div class="text-coral-500 text-3xl mb-4">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Erros a Evitar</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Orientações essenciais para não criar resistência na aceitação alimentar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author Section -->
+    <section id="autora" class="py-20 bg-white/50 dark:bg-gray-800/50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal-element">
+                    <img src="/imagens/FotoPerfilMadeleine_Almeida.jpg" 
+                         alt="Madeleine Nutricionista" 
+                         class="w-full rounded-2xl shadow-2xl">
+                </div>
+                <div class="reveal-element">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        Quem vai te conduzir por esses aprendizados?
+                    </h2>
+                    <div class="space-y-4 text-lg text-gray-700 dark:text-gray-300">
+                        <p>
+                            <strong class="text-coral-600 dark:text-coral-400">Madeleine</strong> é nutricionista com especialidade em Nutrição Clínica Funcional e Comportamental, com mais de 20 anos de atuação na área de Nutrição Infantil.
+                        </p>
+                        <p>
+                            Já ajudou centenas de famílias a melhorarem a aceitação alimentar de seus filhos e sabe exatamente o que você sente quando seu filho se recusa a comer alimentos importantes.
+                        </p>
+                        <div class="bg-coral-50 dark:bg-coral-900/20 p-6 rounded-2xl mt-6">
+                            <h3 class="text-xl font-bold mb-3 text-coral-600 dark:text-coral-400">
+                                Você sabia que...
+                            </h3>
+                            <p class="text-gray-700 dark:text-gray-300">
+                                Do mesmo jeito que a criança aprende a ler e escrever, ela também aprende a comer? 
+                                Comer é um comportamento que precisa ser aprendido!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="py-20 hero-gradient">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal-element">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                    Imagine olhar para seu filho...
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6 mb-12">
+                    <div class="text-white">
+                        <div class="text-4xl mb-4">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <p>Comendo sem estresse e curtindo as refeições em família</p>
+                    </div>
+                    <div class="text-white">
+                        <div class="text-4xl mb-4">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <p>Comendo frutas, legumes e verduras por livre escolha</p>
+                    </div>
+                    <div class="text-white">
+                        <div class="text-4xl mb-4">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <p>Crescendo e se desenvolvendo com saúde</p>
+                    </div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-white mb-4">Oferta Especial de Lançamento</h3>
+                    <div class="text-4xl font-bold text-white mb-2">
+                        De R$ 97,00 por <span class="text-yellow-300">R$ 27,00</span>
+                    </div>
+                    <p class="text-white/90 mb-6">Por tempo limitado - Aproveite já!</p>
+                    <button onclick="comprarEbook()" class="bg-white text-coral-600 px-12 py-4 rounded-full font-bold text-xl hover:bg-gray-100 transition-all transform hover:scale-105">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        Quero Ensinar Meu Filho a Comer
+                    </button>
+                </div>
+                <div class="flex justify-center space-x-8 text-white/80 text-sm">
+                    <div class="flex items-center">
+                        <i class="fas fa-lock mr-2"></i>
+                        <span>Compra Segura</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-undo mr-2"></i>
+                        <span>7 Dias de Garantia</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-download mr-2"></i>
+                        <span>Acesso Imediato</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-100 dark:bg-gray-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="text-gradient text-2xl font-bold mb-4">Guia Alimentar</div>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Transformando vidas através da alimentação consciente
+            </p>
+            <div class="flex justify-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
+                <span>© 2025 Todos os direitos reservados</span>
+                <span>•</span>
+                <span>Termos de Uso</span>
+                <span>•</span>
+                <span>Política de Privacidade</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
